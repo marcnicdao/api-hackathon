@@ -6,7 +6,7 @@ class App {
         this.upcomingContainer = upcomingContainer
         this.searchedContainer = searchedContainer
         this.searchField = searchField;
-        this.searchField.addEventListener('change', ()=>this.getSearchedMovies(this.searchField.value))
+        this.searchField.addEventListener('change', () => this.getSearchedMovies(this.searchField.value))
         this.getMoviesSuccessHandler = this.getMoviesSuccessHandler.bind(this);
         this.getMoviesErrorHandler = this.getMoviesErrorHandler.bind(this);
         this.getTrailerLinkSuccessHandler = this.getTrailerLinkSuccessHandler.bind(this)
@@ -28,7 +28,7 @@ class App {
     getMoviesErrorHandler(err) {
         console.error(err)
     }
-    getUpcomingMovies(){
+    getUpcomingMovies() {
         $.ajax({
             method: "GET",
             url: 'https://api.themoviedb.org/3/movie/upcoming?api_key=a135da89bb4463a852b9155a6280f76b&language=en-US&page=1',
@@ -36,14 +36,14 @@ class App {
             error: this.getPopularErrorHandler
         })
     }
-    getSearchedMovies(title){
+    getSearchedMovies(title) {
         this.searchedContainer.textContent = " ";
         $.ajax({
             method: "GET",
             url: `https://api.themoviedb.org/3/search/movie?api_key=a135da89bb4463a852b9155a6280f76b&append_to_response=people&query=${title}`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.searchedContainer),
             error: this.getPopularErrorHandler
-        } )
+        })
         this.searchField.value = " ";
     }
     loadMovies(movies, container) {
@@ -51,29 +51,35 @@ class App {
             var movieCard = document.createElement('div');
             var anchor = document.createElement('a');
             //debugger
-            this.getTrailerLink(movie.id, anchor);
+            this.getTrailerLink(movie.id);
+            anchor.dataset.movieId = movie.id
             anchor.href = this.trailerLink
+            anchor.target = '_blank'
             movieCard.classList.add('cards')
             var moviePoster = document.createElement('img');
             moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
             movieCard.append(moviePoster);
+            console.log(moviePoster.src)
             anchor.append(movieCard)
-            container.append(anchor);
+            if(movie.poster_path){
+                container.append(anchor);
+            }
         })
     }
-    getTrailerLink(movieId){
+    getTrailerLink(movieId) {
 
         $.ajax({
             method: "GET",
             async: false,
             url: `http://api.themoviedb.org/3/movie/${movieId}/videos?api_key=a135da89bb4463a852b9155a6280f76b`,
-            success: (response)=>{this.getTrailerLinkSuccessHandler(response.results)},
+            success: (response) => { this.getTrailerLinkSuccessHandler(response.results) },
             error: this.getMoviesErrorHandler
         })
     }
 
-    getTrailerLinkSuccessHandler(response){
+    getTrailerLinkSuccessHandler(response) {
         this.trailerLink = `https://www.youtube.com/watch?v=${response[0].key}`
+
     }
 
 

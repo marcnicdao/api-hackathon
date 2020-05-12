@@ -6,7 +6,7 @@ body{
     margin: auto;
 }
 .section-title{
-    font-size: 2rem;
+    font-size: 1.5vmax;
     color: white;
 }
 .popular-scroll{
