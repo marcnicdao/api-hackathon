@@ -14,7 +14,7 @@
 <body>
     <div class="main-container flex">
         <div class="input-div">
-            <input class="search" id="search" placeholder="Enter movie trailer" type="text">
+            <input class="search" id="search" placeholder="Search for trailers......" type="text">
         </div>
         <div class="search-result-container flex view"></div>
         <h3 class="section-title">Popular Movies</h3>
@@ -27,21 +27,24 @@
                 <div class="button-container">
                     <button class="modal-exit">X</button>
                 </div>
-                <iframe class="trailer-player" width="560" height="400" src="null" frameborder="0"
+                <iframe class="trailer-player" height="350" src="null" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                 </iframe>
                 <div class="movie-info">
                     <div>
                         <h3>Overview</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem velit dolores fugiat laudantium consequatur est explicabo cum in cupiditate culpa.</p>
+                        <p class="movie-overview">Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, earum. dolor sit amet consectetur adipisicing elit. Voluptatem velit dolores fugiat laudantium consequatur est explicabo cum in cupiditate culpa.</p>
                     </div>
-                    <div class="ratings">
+                    <div>
+                        <p id="release-date"></p>
+                        <p id="average-rating"></p>
 
                     </div>
                 </div>
             </div>
+            <div class="related-container flex view"></div>
         </div>
-<!-- https://www.youtube.com/embed/5P8R2zAhEwg -->
+
     </div>
 
 
