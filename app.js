@@ -1,50 +1,56 @@
-class App{
-    constructor(mainContainer){
+class App {
+    constructor(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField) {
         this.baseUrl = 'https://api.themoviedb.org/3/?api_key=a135da89bb4463a852b9155a6280f76b'
         this.mainContainer = mainContainer;
-        this.getPopularSuccessHandler = this.getPopularSuccessHandler.bind(this);
-        //this.getPopularErrorHandler = this.getPopularErrorHandler.bind(this);
+        this.popularContainer = popularContainer
+        this.upcomingContainer = upcomingContainer
+        this.searchedContainer = searchedContainer
+        this.searchField = searchField;
+        this.searchField.addEventListener('change', this.getSearchedMovies(this.searchField.value))
+        this.getMoviesSuccessHandler = this.getMoviesSuccessHandler.bind(this);
+        this.getMoviesErrorHandler = this.getMoviesErrorHandler.bind(this);
     }
-    getPopularMovies(){
+    getPopularMovies() {
         $.ajax({
-            method: "Get",
+            method: "GET",
             url: 'https://api.themoviedb.org/3/movie/popular?api_key=a135da89bb4463a852b9155a6280f76b&language=en-US&page=1',
-            success: (movies)=>this.getPopularSuccessHandler(movies.results),
+            success: (movies) => this.getMoviesSuccessHandler(movies.results, this.popularContainer),
+            error: this.getMoviesErrorHandler
+        })
+    }
+    getMoviesSuccessHandler(movies, container) {
+        console.log(movies)
+        this.loadMovies(movies, container)
+    }
+
+    getMoviesErrorHandler(err) {
+        console.error(err)
+    }
+    getUpcomingMovies(){
+        $.ajax({
+            method: "GET",
+            url: 'https://api.themoviedb.org/3/movie/upcoming?api_key=a135da89bb4463a852b9155a6280f76b&language=en-US&page=1',
+            success: (movies) => this.getMoviesSuccessHandler(movies.results, this.upcomingContainer),
             error: this.getPopularErrorHandler
         })
     }
-    getPopularSuccessHandler(movies){
-        console.log(movies)
-        var popularContainer = document.createElement('div');
-        popularContainer.classList.add('movie-scroll')
-        var popularTable = document.createElement('table')
-        popularTable.classList.add('table','table-dark')
-        //var popularTableHead = document.createElement('thead');
-        //var thEl = document.createElement('th');
-        var popularTableBody = document.createElement('tbody');
-        //thEl.textContent = 'Popular Movies';
-        //thEl.classList.add('section-title')
-        //thEl.colSpan = 2
-        //popularTableHead.append(thEl);
-        //popularTable.append(popularTableHead);
-
-        movies.forEach((movies)=>{
-            var row = document.createElement('tr')
-            var posterTd = document.createElement('td');
-            var moviePoster = document.createElement('img');
-            moviePoster.src = `https://image.tmdb.org/t/p/w200${movies.poster_path}`;
-
-            var movieInfo = document.createElement('td');
-            var moviePlot = document.createElement('p');
-            moviePlot.textContent = movies.overview;
-
-            movieInfo.append(moviePlot)
-            posterTd.append(moviePoster)
-            row.append(posterTd, movieInfo)
-            popularTableBody.append(row)
+    getSearchedMovies(title){
+        this.searchedContainer.textContent = " ";
+        $.ajax({
+            method: "GET",
+            url: `https://api.themoviedb.org/3/search/movie?api_key=a135da89bb4463a852b9155a6280f76b&append_to_response=people&query=${title}`,
+            success: (movies) => this.getMoviesSuccessHandler(movies.results, this.searchedContainer),
+            error: this.getPopularErrorHandler
         })
-        popularTable.append(popularTableBody)
-        popularContainer.append(popularTable);
-        this.mainContainer.append(popularContainer)
+    }
+    loadMovies(movies, container) {
+        movies.forEach((movie) => {
+            var movieCard = document.createElement('div');
+            movieCard.classList.add('cards')
+            var moviePoster = document.createElement('img');
+            moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+            movieCard.append(moviePoster);
+            container.append(movieCard);
+        })
     }
 }

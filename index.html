@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <div class="main-container">
+    <div class="main-container flex">
+        <div class="input-div">
+            <input class="search" id="search" placeholder="Enter movie title" type="text">
+        </div>
+        <div class="search-result-container flex view"></div>
+        <h3 class="section-title">Popular Movies</h3>
+        <div class="popular-container flex view"></div>
+        <h3 class="section-title">Upcoming Movies</h3>
+        <div class="upcoming-container flex view"></div>
 
     </div>
 
@@ -19,4 +29,5 @@
     <script src="app.js"></script>
     <script src="main.js"></script>
 </body>
+
 </html>

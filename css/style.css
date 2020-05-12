@@ -1,0 +1,61 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: #343a40;
+    margin: auto;
+}
+.section-title{
+    font-size: 2rem;
+    color: white;
+}
+.popular-scroll{
+    height: 100vh;
+    overflow: scroll;
+}
+.main-container{
+    margin:1%;
+}
+.flex.view{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    margin-bottom: 20px ;
+}
+.cards{
+    margin: 5px
+}
+.input-div{
+    text-align: center;
+}
+.search{
+    width: 40%;
+    text-align: center;
+}
+
+
+
+
+/* Scrollbar style */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
