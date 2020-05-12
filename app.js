@@ -1,5 +1,5 @@
 class App {
-    constructor(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField, movieModal) {
+    constructor(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField) {
         this.mainContainer = mainContainer;
         this.popularContainer = popularContainer
         this.upcomingContainer = upcomingContainer
@@ -10,7 +10,7 @@ class App {
         this.getMoviesErrorHandler = this.getMoviesErrorHandler.bind(this);
         this.getTrailerLinkSuccessHandler = this.getTrailerLinkSuccessHandler.bind(this)
         this.trailerLink = null;
-        this.movieModal = movieModal;
+        this.movieModal = document.querySelector('.modal');
         this.myApikey1 = myApikey1;
     }
     getPopularMovies() {
@@ -57,16 +57,17 @@ class App {
             var trailerAnchor = document.createElement('a');
             var moviePoster = document.createElement('img');
             //debugger
-            this.getTrailerLink(movie.id);
+            //this.getTrailerLink(movie.id);
 
-            trailerAnchor.href = this.trailerLink
-            trailerAnchor.target = '_blank'
+           // trailerAnchor.href = this.trailerLink
+           // trailerAnchor.target = '_blank'
             movieCard.classList.add('cards')
             moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
-            trailerAnchor.append(moviePoster);
-            movieCard.append(trailerAnchor)
-            movieCard.dataset.movieId = movie.id
-
+           // trailerAnchor.append(moviePoster);
+            //movieCard.append(trailerAnchor)
+            moviePoster.dataset.movieId = movie.id
+            movieCard.append(moviePoster)
+            movieCard.addEventListener('click', (e)=>this.showModal(e))
 
             if(movie.poster_path){
                 container.append(movieCard);
@@ -87,11 +88,19 @@ class App {
     }
 
     getTrailerLinkSuccessHandler(response) {
+        var trailerPlayer = document.querySelector('.trailer-player')
         if(response[0]){
-            this.trailerLink = `https://www.youtube.com/watch?v=${response[0].key}`
-
+            this.trailerLink = `https://www.youtube.com/embed/${response[0].key}`
+            trailerPlayer.setAttribute('src', this.trailerLink)
         }
 
+    }
+
+    showModal(e){
+        console.log(e.target)
+        this.movieModal.classList.remove('hidden');
+        this.getTrailerLink(e.target.dataset.movieId)
+       // this.getTrailerLink()
     }
 
 }

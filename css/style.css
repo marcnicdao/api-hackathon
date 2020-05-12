@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 body{
     background-color: #343a40;
@@ -53,10 +54,47 @@ body{
     display:flex;
     justify-content: center;
     align-items: center;
+    height: 60%;
     width: 60%;
+    background-color: rgba(27, 22, 22, 0.959);
+    flex-direction: column;
+    border-radius: 10px
 }
+.movie-info{
+    width: 60%;
+    display:flex;
+    justify-content: space-between;
+    color: white;
+    font-size: .8rem;
+    overflow: auto;
+}
+h3{
+    margin-top: 0;
+    margin-bottom: .5rem;
+}
+.movie-info > div{
+    width: 45%;
+}
+
 .trailer-player{
     width: 60%;
+    margin-bottom: 20px;
+}
+.hidden{
+    visibility: hidden;
+}
+.ratings{
+    text-align: center;
+}
+.button-container{
+    text-align: right;
+    width: 80%;
+}
+.modal-exit{
+    color: white;
+    background-color: transparent;
+    border-radius: 50% ;
+    border: none;
 }
 
 
