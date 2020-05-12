@@ -26,14 +26,20 @@ body{
     margin-bottom: 20px ;
 }
 .cards{
-    margin: 5px
+    margin: 10px
 }
 .input-div{
     text-align: center;
 }
 .search{
-    width: 40%;
-    text-align: center;
+    width: 20%;
+}
+.cards{
+    transition: all .5s;
+}
+.cards:hover {
+    transform:scale(1.1);
+    cursor: pointer;
 }
 
 
