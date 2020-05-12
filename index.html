@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,7 +14,7 @@
 <body>
     <div class="main-container flex">
         <div class="input-div">
-            <input class="search" id="search" placeholder="Enter movie title" type="text">
+            <input class="search" id="search" placeholder="Search for trailers......" type="text">
         </div>
         <div class="search-result-container flex view"></div>
         <h3 class="section-title">Popular Movies</h3>
@@ -22,9 +22,33 @@
         <h3 class="section-title">Upcoming Movies</h3>
         <div class="upcoming-container flex view"></div>
 
+        <div class="modal hidden">
+            <div class="modal-inner">
+                <div class="button-container">
+                    <button class="modal-exit">X</button>
+                </div>
+                <iframe class="trailer-player" height="350" src="null" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+                <div class="movie-info">
+                    <div>
+                        <h3>Overview</h3>
+                        <p class="movie-overview">Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, earum. dolor sit amet consectetur adipisicing elit. Voluptatem velit dolores fugiat laudantium consequatur est explicabo cum in cupiditate culpa.</p>
+                    </div>
+                    <div>
+                        <p id="release-date"></p>
+                        <p id="average-rating"></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="related-container flex view"></div>
+        </div>
+
     </div>
 
 
+    <script src="config.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
     <script src="app.js"></script>
     <script src="main.js"></script>

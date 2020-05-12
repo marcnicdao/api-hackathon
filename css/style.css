@@ -1,17 +1,15 @@
 *{
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 body{
     background-color: #343a40;
     margin: auto;
+    position: relative;
 }
 .section-title{
     font-size: 1.5vmax;
     color: white;
-}
-.popular-scroll{
-    height: 100vh;
-    overflow: scroll;
 }
 .main-container{
     margin:1%;
@@ -25,6 +23,10 @@ body{
     -ms-overflow-style: -ms-autohiding-scrollbar;
     margin-bottom: 20px ;
 }
+.related-container > div > img{
+    height: 150px;
+}
+
 .cards{
     margin: 10px
 }
@@ -33,13 +35,86 @@ body{
 }
 .search{
     width: 20%;
+    height: 2rem;
+    border-radius: 10px;
+    background-color: #000;
+    box-shadow: none;
+    color: #fff;
+    border: 1px solid transparent;
+    padding-left: 2rem;
+    outline: none;
+    padding:auto;
+    font-size: 16px;
+    transition: 0.3s ease all;
 }
+
 .cards{
     transition: all .5s;
 }
 .cards:hover {
     transform:scale(1.1);
     cursor: pointer;
+}
+ .modal{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background:linear-gradient(rgba(5, 1, 1, 0.603), rgba(5, 1, 1, 0.884), rgba(5, 1, 1, 0.603)) ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modal-inner{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(99, 98, 98, 0.9), rgba(0, 0, 0, 0.9));
+    flex-direction: column;
+    border-radius: 10px;
+    padding-bottom: 20px;
+}
+.movie-info{
+    width: 80%;
+    display:flex;
+    justify-content: space-between;
+    color: white;
+    font-size: .8rem;
+    overflow: auto;
+}
+h3{
+    margin-top: 0;
+    margin-bottom: .5rem;
+}
+.movie-info > div{
+    width: 45%;
+    margin-bottom: 20px;
+}
+
+.trailer-player{
+    width: 80%;
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+.hidden{
+    visibility: hidden;
+}
+.ratings{
+    text-align: center;
+}
+.button-container{
+    text-align: right;
+    width: 80%;
+    margin-top: 20px;
+}
+.modal-exit{
+    color: white;
+    background-color: transparent;
+    border-radius: 50% ;
+    border: none;
 }
 
 
