@@ -51,9 +51,8 @@ class App {
             var movieCard = document.createElement('div');
             var anchor = document.createElement('a');
             //debugger
-
             this.getTrailerLink(movie.id, anchor);
-
+            anchor.href = this.trailerLink
             movieCard.classList.add('cards')
             var moviePoster = document.createElement('img');
             moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
@@ -66,6 +65,7 @@ class App {
 
         $.ajax({
             method: "GET",
+            async: false,
             url: `http://api.themoviedb.org/3/movie/${movieId}/videos?api_key=a135da89bb4463a852b9155a6280f76b`,
             success: (response)=>{this.getTrailerLinkSuccessHandler(response.results)},
             error: this.getMoviesErrorHandler
@@ -73,8 +73,7 @@ class App {
     }
 
     getTrailerLinkSuccessHandler(response){
-        this.trailerLink = `www.youtube.com/watch?v=${response[0].key}`
-        anchor.href = this.trailerLink
+        this.trailerLink = `https://www.youtube.com/watch?v=${response[0].key}`
     }
 
 
