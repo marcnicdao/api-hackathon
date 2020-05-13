@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="main-container flex">
+    <div class="main-container">
         <div class="input-div">
             <input class="search" id="search" placeholder="Search for trailers......" type="text">
         </div>
@@ -23,26 +23,31 @@
         <div class="upcoming-container flex view"></div>
 
         <div class="modal hidden">
-            <div class="modal-inner">
-                <div class="button-container">
-                    <button class="modal-exit">X</button>
-                </div>
-                <iframe class="trailer-player" height="350" src="null" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                </iframe>
-                <div class="movie-info">
-                    <div>
-                        <h3>Overview</h3>
-                        <p class="movie-overview">Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, earum. dolor sit amet consectetur adipisicing elit. Voluptatem velit dolores fugiat laudantium consequatur est explicabo cum in cupiditate culpa.</p>
+            <div class="flex center">
+                <div class="modal-inner">
+                    <div class="button-container">
+                        <button class="modal-exit">x</button>
                     </div>
-                    <div>
-                        <p id="release-date"></p>
-                        <p id="average-rating"></p>
+                    <iframe class="trailer-player" height="350" src="null" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                    </iframe>
+                    <div class="movie-info">
+                        <div>
+                            <h3>Overview</h3>
+                            <p class="movie-overview">Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, earum. dolor sit amet consectetur adipisicing elit. Voluptatem velit dolores fugiat laudantium consequatur est explicabo cum in cupiditate culpa.</p>
+                        </div>
+                        <div>
+                            <h3 id="release-date"></h3>
+                            <p id="average-rating"></p>
 
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="related-container flex view"></div>
+            <h3>Similar movies</h3>
+            <div class="related-container flex view">
+
+            </div>
         </div>
 
     </div>
