@@ -14,14 +14,21 @@ body{
 .main-container{
     margin:1%;
 }
-.flex.view{
+.flex{
     display: flex;
+
+}
+.view{
     flex-wrap: nowrap;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     margin-bottom: 20px ;
+}
+.center{
+    justify-content: center;
+    align-items: center;
 }
 .related-container > div > img{
     height: 150px;
@@ -39,11 +46,10 @@ body{
     border-radius: 10px;
     background-color: #000;
     box-shadow: none;
-    color: #fff;
+    color: white;
     border: 1px solid transparent;
     padding-left: 2rem;
     outline: none;
-    padding:auto;
     font-size: 16px;
     transition: 0.3s ease all;
 }
@@ -62,7 +68,6 @@ body{
     top: 0;
     left: 0;
     background:linear-gradient(rgba(5, 1, 1, 0.603), rgba(5, 1, 1, 0.884), rgba(5, 1, 1, 0.603)) ;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -71,11 +76,13 @@ body{
     display:flex;
     justify-content: center;
     align-items: center;
-    width: 40%;
+    width: 50%;
+    height: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(99, 98, 98, 0.9), rgba(0, 0, 0, 0.9));
     flex-direction: column;
     border-radius: 10px;
     padding-bottom: 20px;
+
 }
 .movie-info{
     width: 80%;
@@ -83,20 +90,28 @@ body{
     justify-content: space-between;
     color: white;
     font-size: .8rem;
-    overflow: auto;
+}
+.movie-overview{
+    height:8rem;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space:;
 }
 h3{
     margin-top: 0;
     margin-bottom: .5rem;
+    color: white;
+    margin-top: 20px;
 }
 .movie-info > div{
     width: 45%;
     margin-bottom: 20px;
+    display: inline-block;
 }
 
 .trailer-player{
     width: 80%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-top: 50px;
 }
 .hidden{
@@ -109,6 +124,9 @@ h3{
     text-align: right;
     width: 80%;
     margin-top: 20px;
+}
+.modal-exit:hover{
+    cursor: pointer;
 }
 .modal-exit{
     color: white;

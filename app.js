@@ -15,6 +15,7 @@ class App {
         this.myApikey1 = myApikey1;
         this.exitModal = this.exitModal.bind(this)
         this.similarMovieContainer = similarMovieContainer;
+
     }
     getPopularMovies() {
         $.ajax({
@@ -95,7 +96,7 @@ class App {
         console.log(response);
         movieOverview.textContent = response.overview;
         releaseDate.textContent = response.release_date;
-        averageRate.textContent = `Average ratings: ${response.vote_average} (${response.vote_count}votes)`;
+        averageRate.textContent = `Average ratings: ${response.vote_average} (${response.vote_count} votes)`;
         this.loadMovies(response.similar.results, this.similarMovieContainer)
     }
 
@@ -105,11 +106,10 @@ class App {
         exitButton.addEventListener('click', this.exitModal);
         this.movieModal.classList.remove('hidden');
         this.getModalElements(e.target.dataset.movieId);
-
-
        // this.getTrailerLink()
     }
     exitModal(){
+        this.similarMovieContainer.textContent = " ";
         this.movieModal.classList.add('hidden');
         this.trailerPlayer.setAttribute('src', null);
     }
