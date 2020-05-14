@@ -113,7 +113,6 @@ class App {
         exitButton.addEventListener('click', this.exitModal);
         this.movieModal.classList.remove('hidden');
         this.getModalElements(e.target.dataset.movieId);
-       // this.getTrailerLink()
     }
 
     exitModal(){

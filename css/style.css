@@ -25,12 +25,11 @@ body{
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     margin-bottom: 20px;
-    margin-right: 20px;
     scroll-behavior: smooth;
     position: relative;
     align-items: center;
-
 }
+
 .center{
     justify-content: center;
     align-items: center;
@@ -52,7 +51,6 @@ body{
     box-shadow: none;
     color: black;
     border: 1px solid transparent;
-    padding-left: 2rem;
     outline: none;
     font-size: 1rem;
     transition: 0.4s ease-in-out;
@@ -147,7 +145,7 @@ h3{
     text-align: center;
     z-index: 1;
     height: 300px;
-    margin-top: 10px;
+    margin: 10px;
     border: 0;
     background:linear-gradient( #343a4070, rgba(95, 93, 93, 0.342),#343a4085);
 }
@@ -180,15 +178,15 @@ button:focus{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: rgb(82, 80, 80);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: rgb(32, 31, 31);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgb(24, 23, 23);
 }
