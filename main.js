@@ -1,3 +1,5 @@
+var body = document.querySelector('body');
+body.addEventListener('click', (e)=>app.scroll(e))
 var mainContainer = document.querySelector('.main-container')
 var upcomingContainer = document.querySelector('.upcoming-container')
 var popularContainer = document.querySelector('.popular-container')
@@ -5,5 +7,4 @@ var searchedContainer = document.querySelector('.search-result-container')
 var searchField = document.getElementById('search')
 var similarMovieContainer = document.querySelector('.related-container')
 var app = new App(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField, similarMovieContainer)
-app.getPopularMovies()
-app.getUpcomingMovies()
+app.start()

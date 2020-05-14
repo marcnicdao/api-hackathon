@@ -9,6 +9,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -16,11 +17,30 @@
         <div class="input-div">
             <input class="search" id="search" placeholder="Search for trailers......" type="text">
         </div>
-        <div class="search-result-container flex view"></div>
+
+        <div class = "flex">
+            <button data-target="searched-container" class="left scroll"><</button>
+            <div id="searched-container" class="search-result-container flex view"></div>
+            <button data-target="searched-container" class="right scroll" value=">">></button>
+        </div>
+
+
         <h3 class="section-title">Popular Movies</h3>
-        <div class="popular-container flex view"></div>
+        <div class = "flex">
+            <button data-target="popular-container" class="left scroll"><</button>
+            <div id="popular-container" class="popular-container flex view"></div>
+            <button data-target="popular-container" class="right scroll">></button>
+        </div>
+
+
         <h3 class="section-title">Upcoming Movies</h3>
-        <div class="upcoming-container flex view"></div>
+        <div class = "flex">
+            <button data-target="upcoming-container" class="left scroll"><</button>
+            <div id="upcoming-container" class="upcoming-container flex view"></div>
+            <button data-target="upcoming-container" class="right scroll">></button>
+        </div>
+
+
 
         <div class="modal hidden">
             <div class="flex center">
@@ -28,13 +48,15 @@
                     <div class="button-container">
                         <button class="modal-exit">x</button>
                     </div>
-                    <iframe class="trailer-player" height="350" src="null" frameborder="0"
+                    <iframe class="trailer-player" height="400" src="null" frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                     </iframe>
                     <div class="movie-info">
                         <div>
                             <h3>Overview</h3>
-                            <p class="movie-overview">Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, earum. dolor sit amet consectetur adipisicing elit. Voluptatem velit dolores fugiat laudantium consequatur est explicabo cum in cupiditate culpa.</p>
+                            <p class="movie-overview">Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Aliquid, earum. dolor sit amet consectetur adipisicing elit. Voluptatem velit
+                                dolores fugiat laudantium consequatur est explicabo cum in cupiditate culpa.</p>
                         </div>
                         <div>
                             <h3 id="release-date"></h3>
@@ -45,7 +67,12 @@
                 </div>
             </div>
             <h3>Similar movies</h3>
-            <div class="related-container flex view">
+            <div class="flex">
+                <button data-target="related-container" class="left scroll"><</button>
+                <div id="related-container" class="related-container flex modal-view view">
+
+                </div>
+                <button data-target="related-container" class="right scroll">></button>
 
             </div>
         </div>

@@ -13,10 +13,17 @@ class App {
         this.trailerPlayer = document.querySelector('.trailer-player')
         this.movieModal = document.querySelector('.modal');
         this.myApikey1 = myApikey1;
+        this.myApikey2 = myApikey2;
         this.exitModal = this.exitModal.bind(this)
         this.similarMovieContainer = similarMovieContainer;
-
     }
+
+    start(){
+        app.getPopularMovies()
+        app.getUpcomingMovies()
+        app.getSearchedMovies('star wars')
+    }
+
     getPopularMovies() {
         $.ajax({
             method: "GET",
@@ -48,7 +55,7 @@ class App {
         this.searchedContainer.textContent = " ";
         $.ajax({
             method: "GET",
-            url: `https://api.themoviedb.org/3/search/movie?api_key=${this.myApikey1}&append_to_response=people&query=${title}`,
+            url: `https://api.themoviedb.org/3/search/movie?api_key=${this.myApikey1}&query=${title}`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.searchedContainer),
             error: this.getPopularErrorHandler
         })
@@ -58,20 +65,20 @@ class App {
     loadMovies(movies, container) {
         container.textContent = " "
         movies.forEach((movie) => {
-            var movieCard = document.createElement('div');
             var moviePoster = document.createElement('img');
+            var movieCard = document.createElement('div')
             //debugger
             movieCard.classList.add('cards')
             moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
             moviePoster.title = movie.title
             moviePoster.dataset.movieId = movie.id
             movieCard.append(moviePoster)
-            movieCard.addEventListener('click', (e)=>this.showModal(e))
-
+            moviePoster.addEventListener('click', (e)=>this.showModal(e))
             if(movie.poster_path){
                 container.append(movieCard);
             }
         })
+
     }
 
     getModalElements(movieId) {
@@ -89,11 +96,12 @@ class App {
         if(response.videos.results[0]){
             this.trailerLink = `https://www.youtube.com/embed/${response.videos.results[0].key}`
             this.trailerPlayer.setAttribute('src', this.trailerLink);
+        } else {
+
         }
         var movieOverview = document.querySelector('.movie-overview');
         var releaseDate = document.getElementById('release-date');
         var averageRate = document.getElementById('average-rating');
-        console.log(response);
         movieOverview.textContent = response.overview;
         releaseDate.textContent = response.release_date;
         averageRate.textContent = `Average ratings: ${response.vote_average} (${response.vote_count} votes)`;
@@ -101,17 +109,29 @@ class App {
     }
 
     showModal(e){
-        console.log(e.target)
         var exitButton = document.querySelector('.modal-exit');
         exitButton.addEventListener('click', this.exitModal);
         this.movieModal.classList.remove('hidden');
         this.getModalElements(e.target.dataset.movieId);
-       // this.getTrailerLink()
     }
+
     exitModal(){
         this.similarMovieContainer.textContent = " ";
         this.movieModal.classList.add('hidden');
         this.trailerPlayer.setAttribute('src', null);
+    }
+
+    scroll(e){
+        if(!e.target.classList.contains('scroll')){
+            return
+        }
+        var targetContainer = document.getElementById(e.target.dataset.target)
+        if(e.target.classList.contains('right')){
+            targetContainer.scrollBy(1000,0)
+        } else {
+            targetContainer.scrollBy(-1000,0)
+        }
+
     }
 
 }
