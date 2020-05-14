@@ -96,9 +96,7 @@ class App {
         if(response.videos.results[0]){
             this.trailerLink = `https://www.youtube.com/embed/${response.videos.results[0].key}`
             this.trailerPlayer.setAttribute('src', this.trailerLink);
-        } else {
-
-        }
+        } //else say NO AVAILABLE TRAILER
         var movieOverview = document.querySelector('.movie-overview');
         var releaseDate = document.getElementById('release-date');
         var averageRate = document.getElementById('average-rating');
@@ -109,6 +107,7 @@ class App {
     }
 
     showModal(e){
+        //debugger
         var exitButton = document.querySelector('.modal-exit');
         exitButton.addEventListener('click', this.exitModal);
         this.movieModal.classList.remove('hidden');
