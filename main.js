@@ -10,8 +10,8 @@ var movieOverview = document.querySelector('.movie-overview');
 var releaseDate = document.getElementById('release-date');
 var averageRate = document.getElementById('average-rating');
 var genreContainer = document.getElementById('genre-container');
-var genreTitle = document.getElementById('genre-title');
 var navUl = document.getElementById('nav-ul');
+var genreTitle = document.getElementById('genre-title');
 var app = new App(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField, similarMovieContainer, genreContainer)
 
 body.addEventListener('click', (e)=>app.eventHandler(e));

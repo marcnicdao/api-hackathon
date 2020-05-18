@@ -158,6 +158,9 @@ class App {
         if (e.target.classList.contains('genre')){
             this.getMovieByGenre(e)
         }
+        if (e.target.classList.contains('nav')){
+            this.handleNav()
+        }
     }
 
     scroll(e) {
@@ -170,5 +173,12 @@ class App {
 
     }
 
+    handleNav(){
+        if(navUl.classList.contains('no-display')){
+            navUl.classList.remove('no-display')
+        } else {
+            navUl.classList.add('no-display')
+        }
+    }
 
 }
