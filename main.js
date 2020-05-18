@@ -1,10 +1,20 @@
 var body = document.querySelector('body');
-body.addEventListener('click', (e)=>app.scroll(e))
 var mainContainer = document.querySelector('.main-container')
 var upcomingContainer = document.querySelector('.upcoming-container')
 var popularContainer = document.querySelector('.popular-container')
 var searchedContainer = document.querySelector('.search-result-container')
 var searchField = document.getElementById('search')
 var similarMovieContainer = document.querySelector('.related-container')
-var app = new App(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField, similarMovieContainer)
+var exitButton = document.querySelector('.modal-exit');
+var movieOverview = document.querySelector('.movie-overview');
+var releaseDate = document.getElementById('release-date');
+var averageRate = document.getElementById('average-rating');
+var genreContainer = document.getElementById('genre-container');
+var genreTitle = document.getElementById('genre-title');
+var navUl = document.getElementById('nav-ul');
+var app = new App(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField, similarMovieContainer, genreContainer)
+
+body.addEventListener('click', (e)=>app.eventHandler(e));
+exitButton.addEventListener('click', app.exitModal);
+
 app.start()

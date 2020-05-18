@@ -1,9 +1,11 @@
 class App {
-    constructor(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField, similarMovieContainer) {
+    constructor(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField, similarMovieContainer, genreContainer) {
         this.mainContainer = mainContainer;
-        this.popularContainer = popularContainer
-        this.upcomingContainer = upcomingContainer
-        this.searchedContainer = searchedContainer
+        this.popularContainer = popularContainer;
+        this.upcomingContainer = upcomingContainer;
+        this.searchedContainer = searchedContainer;
+        this.genreContainer = genreContainer;
+        this.movies = [];
         this.searchField = searchField;
         this.searchField.addEventListener('change', () => this.getSearchedMovies(this.searchField.value))
         this.getMoviesSuccessHandler = this.getMoviesSuccessHandler.bind(this);
@@ -15,13 +17,33 @@ class App {
         this.myApikey1 = myApikey1;
         this.myApikey2 = myApikey2;
         this.exitModal = this.exitModal.bind(this)
+        this.domElements = {}
         this.similarMovieContainer = similarMovieContainer;
     }
 
-    start(){
-        app.getPopularMovies()
-        app.getUpcomingMovies()
-        app.getSearchedMovies('star wars')
+    start() {
+        this.getPopularMovies();
+        this.getUpcomingMovies();
+        this.getSearchedMovies('star wars');
+        this.getGenreList();
+        this.getMovieByGenre();
+    }
+
+    getGenreList() {
+        $.ajax({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/genre/movie/list?api_key=${this.myApikey1}`,
+            success: (response) => this.fillNavBar(response.genres)
+        })
+    }
+    fillNavBar(genres){
+        genres.forEach((genres)=>{
+            var newLi = document.createElement('li');
+            newLi.textContent = genres.name;
+            newLi.classList.add('genre');
+            newLi.dataset.genreId = genres.id;
+            navUl.append(newLi)
+        })
     }
 
     getPopularMovies() {
@@ -47,7 +69,7 @@ class App {
             method: "GET",
             url: `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.myApikey1}&language=en-US&page=1`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.upcomingContainer),
-            error: this.getPopularErrorHandler
+            error: this.errorHandler
         })
     }
 
@@ -57,24 +79,36 @@ class App {
             method: "GET",
             url: `https://api.themoviedb.org/3/search/movie?api_key=${this.myApikey1}&query=${title}`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.searchedContainer),
-            error: this.getPopularErrorHandler
+            error: this.errorHandler
         })
         this.searchField.value = " ";
+    }
+
+    getMovieByGenre(e){
+        var genreId = (genreTitle.textContent ? e.target.dataset.genreId : '28');
+        genreTitle.textContent = (genreTitle.textContent ? e.target.textContent : "Action") ;
+        this.genreContainer.textContent = " ";
+        $.ajax({
+            method: 'GET',
+            url: `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&sort_by=vote_average.desc&vote_count.gte=10&api_key=${this.myApikey1}`,
+            success: (movies) => this.loadMovies(movies.results, this.genreContainer),
+            error: this.errorHandler
+        })
     }
 
     loadMovies(movies, container) {
         container.textContent = " "
         movies.forEach((movie) => {
+            //debugger
             var moviePoster = document.createElement('img');
             var movieCard = document.createElement('div')
-            //debugger
             movieCard.classList.add('cards')
             moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
             moviePoster.title = movie.title
             moviePoster.dataset.movieId = movie.id
             movieCard.append(moviePoster)
-            moviePoster.addEventListener('click', (e)=>this.showModal(e))
-            if(movie.poster_path){
+            moviePoster.addEventListener('click', (e) => this.showModal(e))
+            if (movie.poster_path) {
                 container.append(movieCard);
             }
         })
@@ -82,55 +116,59 @@ class App {
     }
 
     getModalElements(movieId) {
-
         $.ajax({
             method: "GET",
             url: `http://api.themoviedb.org/3/movie/${movieId}?api_key=${this.myApikey1}&language=en-US&append_to_response=videos,similar`,
-            success: (response) =>{ this.getModalElementsSuccessHandler(response)
-            console.log(response) },
+            success: response => {
+                this.getModalElementsSuccessHandler(response)
+                console.log(response)
+            },
             error: this.getMoviesErrorHandler
         })
     }
 
     getModalElementsSuccessHandler(response) {
-        if(response.videos.results[0]){
+        if (response.videos.results[0]) {
             this.trailerLink = `https://www.youtube.com/embed/${response.videos.results[0].key}`
             this.trailerPlayer.setAttribute('src', this.trailerLink);
         } //else say NO AVAILABLE TRAILER
-        var movieOverview = document.querySelector('.movie-overview');
-        var releaseDate = document.getElementById('release-date');
-        var averageRate = document.getElementById('average-rating');
         movieOverview.textContent = response.overview;
         releaseDate.textContent = response.release_date;
         averageRate.textContent = `Average ratings: ${response.vote_average} (${response.vote_count} votes)`;
         this.loadMovies(response.similar.results, this.similarMovieContainer)
     }
 
-    showModal(e){
+    showModal(e) {
         //debugger
-        var exitButton = document.querySelector('.modal-exit');
-        exitButton.addEventListener('click', this.exitModal);
+
         this.movieModal.classList.remove('hidden');
         this.getModalElements(e.target.dataset.movieId);
     }
 
-    exitModal(){
+    exitModal() {
         this.similarMovieContainer.textContent = " ";
         this.movieModal.classList.add('hidden');
         this.trailerPlayer.setAttribute('src', null);
     }
 
-    scroll(e){
-        if(!e.target.classList.contains('scroll')){
-            return
+    eventHandler(e) {
+        if (e.target.classList.contains('scroll')) {
+            this.scroll(e)
         }
+        if (e.target.classList.contains('genre')){
+            this.getMovieByGenre(e)
+        }
+    }
+
+    scroll(e) {
         var targetContainer = document.getElementById(e.target.dataset.target)
-        if(e.target.classList.contains('right')){
-            targetContainer.scrollBy(1000,0)
+        if (e.target.classList.contains('right')) {
+            targetContainer.scrollBy(1000, 0)
         } else {
-            targetContainer.scrollBy(-1000,0)
+            targetContainer.scrollBy(-1000, 0)
         }
 
     }
+
 
 }

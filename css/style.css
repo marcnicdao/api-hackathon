@@ -41,7 +41,18 @@ body{
 .cards{
     margin: 10px
 }
-.input-div{
+ul{
+    list-style: none;
+}
+li {
+    margin: 5px;
+    color: white;
+}
+li:hover{
+    cursor: pointer;
+    color: black;
+}
+.nav-div{
     text-align: center;
 }
 .search{

@@ -11,19 +11,28 @@
 
 <body>
     <div class="main-container">
-        <div class="input-div">
+        <div class="nav-div flex center">
             <input class="search" id="search" placeholder="Search for trailers......" type="text">
+            <ul id="nav-ul" class="flex">
+            </ul>
+
         </div>
 
-        <div class = "flex">
+        <div class="flex">
             <button data-target="searched-container" class="left scroll"><</button>
             <div id="searched-container" class="search-result-container flex view"></div>
             <button data-target="searched-container" class="right scroll" value=">">></button>
         </div>
 
+        <h3 class="section-title" id="genre-title"></h3>
+        <div class="flex">
+            <button data-target="genre-container" class="left scroll"><</button>
+            <div id="genre-container" class="genre-container flex view"></div>
+            <button data-target="genre-container" class="right scroll">></button>
+        </div>
 
         <h3 class="section-title">Popular Movies</h3>
-        <div class = "flex">
+        <div class="flex">
             <button data-target="popular-container" class="left scroll"><</button>
             <div id="popular-container" class="popular-container flex view"></div>
             <button data-target="popular-container" class="right scroll">></button>
@@ -31,7 +40,7 @@
 
 
         <h3 class="section-title">Upcoming Movies</h3>
-        <div class = "flex">
+        <div class="flex">
             <button data-target="upcoming-container" class="left scroll"><</button>
             <div id="upcoming-container" class="upcoming-container flex view"></div>
             <button data-target="upcoming-container" class="right scroll">></button>
@@ -65,11 +74,11 @@
             </div>
             <h3>Similar movies</h3>
             <div class="flex">
-                <button data-target="related-container" class="left scroll"><</button>
-                <div id="related-container" class="related-container flex modal-view view">
+                <button data-target="related-container" class="left scroll similar"><</button>
+                        <div id="related-container" class="related-container flex modal-view view">
 
-                </div>
-                <button data-target="related-container" class="right scroll">></button>
+                        </div>
+                        <button data-target="related-container" class="right scroll similar">></button>
 
             </div>
         </div>
