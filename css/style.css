@@ -47,10 +47,12 @@ ul{
 li {
     margin: 5px;
     color: white;
+    transition: all .3s ease-in-out;
 }
 li:hover{
     cursor: pointer;
     color: black;
+    transform: scale(1.05);
 }
 .nav-div{
     text-align: center;

@@ -90,7 +90,7 @@ class App {
         this.genreContainer.textContent = " ";
         $.ajax({
             method: 'GET',
-            url: `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&sort_by=vote_average.desc&vote_count.gte=10&api_key=${this.myApikey1}`,
+            url: `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&sort_by=popularity.desc&vote_count.gte=10&api_key=${this.myApikey1}`,
             success: (movies) => this.loadMovies(movies.results, this.genreContainer),
             error: this.errorHandler
         })
