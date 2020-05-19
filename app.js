@@ -133,14 +133,12 @@ class App {
             this.trailerPlayer.setAttribute('src', this.trailerLink);
         } //else say NO AVAILABLE TRAILER
         movieOverview.textContent = response.overview;
-        releaseDate.textContent = response.release_date;
+        releaseDate.textContent = "Released: " + response.release_date;
         averageRate.textContent = `Average ratings: ${response.vote_average} (${response.vote_count} votes)`;
         this.loadMovies(response.similar.results, this.similarMovieContainer)
     }
 
     showModal(e) {
-        //debugger
-
         this.movieModal.classList.remove('hidden');
         this.getModalElements(e.target.dataset.movieId);
     }
