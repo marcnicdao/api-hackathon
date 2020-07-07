@@ -124,7 +124,7 @@ class App {
     getModalElements(movieId) {
         $.ajax({
             method: "GET",
-            url: `http://api.themoviedb.org/3/movie/${movieId}?api_key=${this.myApikey1}&language=en-US&append_to_response=videos,similar`,
+            url: `https://api.themoviedb.org/3/movie/${movieId}?api_key=${this.myApikey1}&language=en-US&append_to_response=videos,similar`,
             success: response => {
                 this.getModalElementsSuccessHandler(response)
             },
