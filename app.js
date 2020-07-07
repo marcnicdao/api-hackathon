@@ -14,7 +14,7 @@ class App {
         this.trailerLink = null;
         this.trailerPlayer = document.querySelector('.trailer-player')
         this.movieModal = document.querySelector('.modal');
-        this.myApikey1 = 'a135da89bb4463a852b9155a6280f76b';
+        this.myApikey1 = this.myApikey1;
         this.exitModal = this.exitModal.bind(this)
         this.domElements = {}
         this.similarMovieContainer = similarMovieContainer;
