@@ -79,7 +79,10 @@ class App {
             method: "GET",
             url: `https://api.themoviedb.org/3/search/movie?api_key=${this.myApikey1}&query=${title}`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.searchedContainer),
-            error: this.errorHandler
+            error: () => {
+                this.errorHandler();
+                alert('Could not contact server ')
+            }
         })
         this.searchField.value = " ";
     }
@@ -92,23 +95,26 @@ class App {
             method: 'GET',
             url: `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&sort_by=popularity.desc&vote_count.gte=10&api_key=${this.myApikey1}`,
             success: (movies) => this.loadMovies(movies.results, this.genreContainer),
-            error: this.errorHandler
+            error: ()=> {
+                this.errorHandler();
+                alert('Could not contact server ')
+            }
         })
     }
 
     loadMovies(movies, container) {
-        container.textContent = " "
+        container.textContent = ""
         movies.forEach((movie) => {
-            //debugger
             var moviePoster = document.createElement('img');
             var movieCard = document.createElement('div')
             movieCard.classList.add('cards')
-            moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
             moviePoster.title = movie.title
             moviePoster.dataset.movieId = movie.id
+            moviePoster.classList.add('poster')
             movieCard.append(moviePoster)
             moviePoster.addEventListener('click', (e) => this.showModal(e))
             if (movie.poster_path) {
+                moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
                 container.append(movieCard);
             }
         })
@@ -121,17 +127,19 @@ class App {
             url: `http://api.themoviedb.org/3/movie/${movieId}?api_key=${this.myApikey1}&language=en-US&append_to_response=videos,similar`,
             success: response => {
                 this.getModalElementsSuccessHandler(response)
-                console.log(response)
             },
             error: this.getMoviesErrorHandler
         })
+    }
+    showErrorModal(){
+
     }
 
     getModalElementsSuccessHandler(response) {
         if (response.videos.results[0]) {
             this.trailerLink = `https://www.youtube.com/embed/${response.videos.results[0].key}`
             this.trailerPlayer.setAttribute('src', this.trailerLink);
-        } //else say NO AVAILABLE TRAILER
+        }
         movieOverview.textContent = response.overview;
         releaseDate.textContent = "Released: " + response.release_date;
         averageRate.textContent = `Average ratings: ${response.vote_average} (${response.vote_count} votes)`;
@@ -164,9 +172,9 @@ class App {
     scroll(e) {
         var targetContainer = document.getElementById(e.target.dataset.target)
         if (e.target.classList.contains('right')) {
-            targetContainer.scrollBy(1000, 0)
+            targetContainer.scrollBy(window.innerWidth/1.5, 0)
         } else {
-            targetContainer.scrollBy(-1000, 0)
+            targetContainer.scrollBy(-window.innerWidth/1.5, 0)
         }
 
     }
