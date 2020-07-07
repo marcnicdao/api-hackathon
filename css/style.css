@@ -110,8 +110,8 @@ i:hover{
     position: fixed;
     top: 0;
     left: 0;
-    flex-direction: column;    background:linear-gradient(rgba(5, 1, 1, 0.671), rgba(19, 15, 15, 0.815), rgba(5, 1, 1, 0.664)) ;
-
+    flex-direction: column;
+    background:linear-gradient(rgba(5, 1, 1, 0.829), rgba(19, 15, 15, 0.815), rgba(5, 1, 1, 0.815)) ;
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -175,6 +175,10 @@ h3{
     background-color: transparent;
     border-radius: 50% ;
     border: none;
+}
+.modal-similar{
+    background-color: #030507;
+    width: 50%;
 }
 
 .scroll{

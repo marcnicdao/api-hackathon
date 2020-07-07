@@ -20,31 +20,31 @@
         </div>
 
         <div class="flex">
-            <button data-target="searched-container" class="left scroll"><</button>
+            <button data-target="searched-container" class="left scroll"><i class="fas fa-chevron-left"></i></button>
             <div id="searched-container" class="search-result-container flex view"></div>
-            <button data-target="searched-container" class="right scroll" value=">">></button>
+            <button data-target="searched-container" class="right scroll" value=">"><i class="fas fa-chevron-right"></i></button>
         </div>
 
         <h3 class="section-title" id="genre-title"></h3>
         <div class="flex">
-            <button data-target="genre-container" class="left scroll"><</button>
+            <button data-target="genre-container" class="left scroll"><i class="fas fa-chevron-left"></i></button>
             <div id="genre-container" class="genre-container flex view"></div>
-            <button data-target="genre-container" class="right scroll">></button>
+            <button data-target="genre-container" class="right scroll"><i class="fas fa-chevron-right"></i></button>
         </div>
 
         <h3 class="section-title">Popular Movies</h3>
         <div class="flex">
-            <button data-target="popular-container" class="left scroll"><</button>
+            <button data-target="popular-container" class="left scroll"><i class="fas fa-chevron-left"></i></button>
             <div id="popular-container" class="popular-container flex view"></div>
-            <button data-target="popular-container" class="right scroll">></button>
+            <button data-target="popular-container" class="right scroll"><i class="fas fa-chevron-right"></i></button>
         </div>
 
 
         <h3 class="section-title">Upcoming Movies</h3>
         <div class="flex">
-            <button data-target="upcoming-container" class="left scroll"><</button>
+            <button data-target="upcoming-container" class="left scroll"><i class="fas fa-chevron-left"></i></button>
             <div id="upcoming-container" class="upcoming-container flex view"></div>
-            <button data-target="upcoming-container" class="right scroll">></button>
+            <button data-target="upcoming-container" class="right scroll"><i class="fas fa-chevron-right"></i></button>
         </div>
 
 
@@ -55,7 +55,7 @@
                     <div class="button-container">
                         <button class="modal-exit">x</button>
                     </div>
-                    <iframe class="trailer-player" height="400" src="null" frameborder="0"
+                    <iframe class="trailer-player" height="400" src="" frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                     </iframe>
                     <div class="movie-info">
@@ -73,14 +73,20 @@
                     </div>
                 </div>
             </div>
-            <h3>Similar movies</h3>
-            <div class="flex">
-                <button data-target="related-container" class="left scroll similar"><</button>
-                        <div id="related-container" class="related-container flex modal-view view">
+            <div class="flex center">
+                <h3>Similar movies</h3>
+            </div>
+            <div class="flex center">
+                <div class="flex modal-similar">
+                    <button data-target="related-container" class="left scroll similar"><i class="fas fa-chevron-left"></i></button>
+                    <div id="related-container" class="related-container flex modal-view view">
 
-                        </div>
-                        <button data-target="related-container" class="right scroll similar">></button>
+                    </div>
+                    <button data-target="related-container" class="right scroll similar">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
 
+                </div>
             </div>
         </div>
 

@@ -103,12 +103,13 @@ class App {
             var moviePoster = document.createElement('img');
             var movieCard = document.createElement('div')
             movieCard.classList.add('cards')
-            moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+
             moviePoster.title = movie.title
             moviePoster.dataset.movieId = movie.id
             movieCard.append(moviePoster)
             moviePoster.addEventListener('click', (e) => this.showModal(e))
             if (movie.poster_path) {
+                moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
                 container.append(movieCard);
             }
         })
@@ -121,7 +122,6 @@ class App {
             url: `http://api.themoviedb.org/3/movie/${movieId}?api_key=${this.myApikey1}&language=en-US&append_to_response=videos,similar`,
             success: response => {
                 this.getModalElementsSuccessHandler(response)
-                console.log(response)
             },
             error: this.getMoviesErrorHandler
         })
