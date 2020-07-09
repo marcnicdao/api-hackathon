@@ -116,8 +116,15 @@ class App {
                 moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
                 container.append(movieCard);
             }
-        })
 
+        })
+        if (this.similarMovieContainer.childElementCount){
+            document.querySelector('.modal-similar').classList.remove('no-display')
+            similarMovieCaption.textContent = 'Similar Movies'
+        } else {
+            document.querySelector('.modal-similar').classList.add('no-display')
+            similarMovieCaption.textContent = 'No similar movies found'
+        }
     }
 
     getModalElements(movieId) {
@@ -138,6 +145,11 @@ class App {
         if (response.videos.results[0]) {
             this.trailerLink = `https://www.youtube.com/embed/${response.videos.results[0].key}`
             this.trailerPlayer.setAttribute('src', this.trailerLink);
+            this.trailerPlayer.classList.remove('no-display')
+            noTrailerCaption.classList.add('no-display')
+        } else {
+            this.trailerPlayer.classList.add('no-display')
+            noTrailerCaption.classList.remove('no-display')
         }
         movieOverview.textContent = response.overview;
         releaseDate.textContent = "Released: " + response.release_date;
@@ -153,7 +165,7 @@ class App {
     exitModal() {
         this.similarMovieContainer.textContent = " ";
         this.movieModal.classList.add('hidden');
-        this.trailerPlayer.setAttribute('src', null);
+        this.trailerPlayer.removeAttribute('src');
     }
 
     eventHandler(e) {
