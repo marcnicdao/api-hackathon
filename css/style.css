@@ -188,7 +188,6 @@ h3{
 .modal-similar{
     background-color: #030507;
     width: 100%;
-    border-radius: 10px;
 }
 
 button.scroll{
@@ -269,6 +268,9 @@ button:focus{
         flex-direction: column;
         border-radius: 10px;
         padding-bottom: 20px;
+    }
+    .movie-info{
+        font-size: 10px;
     }
 }
 
