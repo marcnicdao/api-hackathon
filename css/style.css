@@ -272,6 +272,9 @@ button:focus{
     .movie-info{
         font-size: 10px;
     }
+    .modal-inner > div > h3{
+        display: none;
+    }
 }
 
 @media only screen
