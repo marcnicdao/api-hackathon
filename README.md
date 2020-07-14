@@ -3,7 +3,7 @@ A web application for users to quickly find and watch trailers for a movie they 
 Optimized for desktop viewing.
 
 # Technologies Used
-* JavaScrip
+* JavaScript
 * HTML 5
 * CSS 3
 * jQuery AJAX
