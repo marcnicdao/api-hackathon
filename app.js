@@ -46,6 +46,9 @@ class App {
     }
 
     getPopularMovies() {
+        var loading = document.createElement('div')
+        loading.classList.add('loading')
+        this.popularContainer.append(loading)
         $.ajax({
             method: "GET",
             url: `https://api.themoviedb.org/3/movie/popular?api_key=${this.myApikey1}&language=en-US&page=1`,
@@ -64,6 +67,9 @@ class App {
     }
 
     getUpcomingMovies() {
+        var loading = document.createElement('div')
+        loading.classList.add('loading')
+        this.upcomingContainer.append(loading)
         $.ajax({
             method: "GET",
             url: `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.myApikey1}&language=en-US&page=1`,
@@ -73,7 +79,9 @@ class App {
     }
 
     getSearchedMovies(title) {
-        this.searchedContainer.textContent = " ";
+        var loading = document.createElement('div')
+        loading.classList.add('loading')
+        this.searchedContainer.append(loading)
         $.ajax({
             method: "GET",
             url: `https://api.themoviedb.org/3/search/movie?api_key=${this.myApikey1}&query=${title}`,
@@ -89,7 +97,9 @@ class App {
     getMovieByGenre(e){
         var genreId = (genreTitle.textContent ? e.target.dataset.genreId : '28');
         genreTitle.textContent = (genreTitle.textContent ? e.target.textContent : "Action") ;
-        this.genreContainer.textContent = " ";
+        var loading = document.createElement('div')
+        loading.classList.add('loading')
+        this.genreContainer.append(loading)
         $.ajax({
             method: 'GET',
             url: `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&sort_by=popularity.desc&vote_count.gte=10&api_key=${this.myApikey1}`,
@@ -103,6 +113,7 @@ class App {
 
     loadMovies(movies, container) {
         container.textContent = ""
+
         movies.forEach((movie) => {
             var moviePoster = document.createElement('img');
             var movieCard = document.createElement('div')
@@ -116,7 +127,6 @@ class App {
                 moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
                 container.append(movieCard);
             }
-
         })
         if (this.similarMovieContainer.childElementCount){
             document.querySelector('.modal-similar').classList.remove('no-display')
@@ -128,6 +138,9 @@ class App {
     }
 
     getModalElements(movieId) {
+        var loading = document.createElement('div')
+        loading.classList.add('loading')
+        this.similarMovieContainer.append(loading)
         $.ajax({
             method: "GET",
             url: `https://api.themoviedb.org/3/movie/${movieId}?api_key=${this.myApikey1}&language=en-US&append_to_response=videos,similar`,
@@ -137,9 +150,7 @@ class App {
             error: this.getMoviesErrorHandler
         })
     }
-    showErrorModal(){
 
-    }
 
     getModalElementsSuccessHandler(response) {
         if (response.videos.results[0]) {
@@ -169,14 +180,24 @@ class App {
     }
 
     eventHandler(e) {
+
         if (e.target.classList.contains('scroll')) {
             this.scroll(e)
+            return
         }
         if (e.target.classList.contains('genre')){
             this.getMovieByGenre(e)
+            navUl.classList.add('no-display')
+            return
         }
         if (e.target.classList.contains('nav')){
             this.handleNav()
+        }
+        if(e.target.classList.contains('modal-inner-container')){
+            this.exitModal()
+        }
+        if (!e.target.classList.contains('nav-ul') && !e.target.classList.contains('nav')){
+            navUl.classList.add('no-display')
         }
     }
 
