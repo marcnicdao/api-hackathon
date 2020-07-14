@@ -2,6 +2,12 @@
 A web application for users to quickly find and watch trailers for a movie they are interested in.    
 Optimized for desktop viewing.
 
+# Technologies Used
+* JavaScrip
+* HTML 5
+* CSS 3
+* jQuery AJAX
+
 # Live Demo
 A live demo of the of application can be viewed at this [link](https://trailers.marcnicdao.com/)  
 
