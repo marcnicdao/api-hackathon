@@ -153,7 +153,8 @@ class App {
             noResults.classList.remove('no-display')
         }
         setTimeout(()=>{
-            if (container.offsetWidth > container.scrollWidth) {
+            console.log(container.clientWidth, container.scrollWidth)
+            if (container.clientWidth >= container.scrollWidth) {
                 rightScrollButton.disabled = true
                 leftScrollButton.disabled = true
             } else {
@@ -231,26 +232,26 @@ class App {
         var targetContainer = document.getElementById(e.target.dataset.target)
         var leftScrollButton = targetContainer.previousElementSibling
         var rightScrollButton = targetContainer.nextElementSibling
-        $.fn.scrollRight = function () {
-            return $(targetContainer).innerWidth() - $(targetContainer).scrollLeft() - $(window).innerWidth();
-        };
 
         if (e.target.classList.contains('right')) {
-            var scrollLenght = window.innerWidth / 1.5;
-            var offset = Math.ceil(Math.abs($(targetContainer).scrollRight()))
-            var isAtTheEnd = offset >= scrollLenght
+            var scrollLenght = targetContainer.clientWidth / 1.5;
+            var offset = ((targetContainer.scrollWidth - targetContainer.clientWidth) - targetContainer.scrollLeft)
+            var isAtTheEnd = offset <= scrollLenght
+
 
             leftScrollButton.disabled = false
             targetContainer.scrollBy(scrollLenght, 0)
             rightScrollButton.disabled = isAtTheEnd
+
         } else {
             var offset = targetContainer.scrollLeft;
-            var scrollLenght = window.innerWidth / 1.5;
+            var scrollLenght = targetContainer.clientWidth / 1.5;
             var isAtTheEnd = offset <= scrollLenght
 
             rightScrollButton.disabled = false
             targetContainer.scrollBy(-scrollLenght, 0)
             leftScrollButton.disabled = isAtTheEnd
+            console.log(offset)
         }
 
     }
