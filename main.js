@@ -14,6 +14,8 @@ var navUl = document.getElementById('nav-ul');
 var genreTitle = document.getElementById('genre-title');
 var similarMovieCaption = document.querySelector('.similar-movie-caption')
 var noTrailerCaption = document.querySelector('.no-trailer-caption')
+var searchedTitle = document.querySelector('.search-title')
+var noResults = document.querySelector('.no-results')
 var app = new App(mainContainer, popularContainer, upcomingContainer, searchedContainer, searchField, similarMovieContainer, genreContainer)
 
 body.addEventListener('click', (e)=>app.eventHandler(e));

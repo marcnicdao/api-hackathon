@@ -79,6 +79,10 @@ class App {
     }
 
     getSearchedMovies(title) {
+        if(!title.trim()){
+            this.searchField.value = ""
+            return
+        }
         var loading = document.createElement('div')
         loading.classList.add('loading')
         this.searchedContainer.append(loading)
@@ -91,7 +95,8 @@ class App {
                 alert('Could not contact server ')
             }
         })
-        this.searchField.value = " ";
+        searchedTitle.textContent = `You searched for: ${title}`
+        this.searchField.value = "";
     }
 
     getMovieByGenre(e){
@@ -112,6 +117,8 @@ class App {
     }
 
     loadMovies(movies, container) {
+        var leftScrollButton = container.previousElementSibling
+        var rightScrollButton = container.nextElementSibling
         container.textContent = ""
 
         movies.forEach((movie) => {
@@ -127,7 +134,10 @@ class App {
                 moviePoster.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`
                 container.append(movieCard);
             }
+
         })
+        console.log(container.offsetWidth, container.scrollWidth)
+
         if (this.similarMovieContainer.childElementCount){
             document.querySelector('.modal-similar').classList.remove('no-display')
             similarMovieCaption.textContent = 'Similar Movies'
@@ -135,6 +145,22 @@ class App {
             document.querySelector('.modal-similar').classList.add('no-display')
             similarMovieCaption.textContent = 'No similar movies found'
         }
+        if (this.searchedContainer.childElementCount) {
+            document.querySelector('.search-main-container').classList.remove('no-display')
+            noResults.classList.add(`no-display`)
+        } else {
+            document.querySelector('.search-main-container').classList.add('no-display')
+            noResults.classList.remove('no-display')
+        }
+        setTimeout(()=>{
+            if (container.offsetWidth > container.scrollWidth) {
+                rightScrollButton.disabled = true
+                leftScrollButton.disabled = true
+            } else {
+                rightScrollButton.disabled = false
+                leftScrollButton.disabled = true
+            }
+        }, 300)
     }
 
     getModalElements(movieId) {
@@ -203,10 +229,28 @@ class App {
 
     scroll(e) {
         var targetContainer = document.getElementById(e.target.dataset.target)
+        var leftScrollButton = targetContainer.previousElementSibling
+        var rightScrollButton = targetContainer.nextElementSibling
+        $.fn.scrollRight = function () {
+            return $(targetContainer).innerWidth() - $(targetContainer).scrollLeft() - $(window).innerWidth();
+        };
+
         if (e.target.classList.contains('right')) {
-            targetContainer.scrollBy(window.innerWidth/1.5, 0)
+            var scrollLenght = window.innerWidth / 1.5;
+            var offset = Math.ceil(Math.abs($(targetContainer).scrollRight()))
+            var isAtTheEnd = offset >= scrollLenght
+
+            leftScrollButton.disabled = false
+            targetContainer.scrollBy(scrollLenght, 0)
+            rightScrollButton.disabled = isAtTheEnd
         } else {
-            targetContainer.scrollBy(-window.innerWidth/1.5, 0)
+            var offset = targetContainer.scrollLeft;
+            var scrollLenght = window.innerWidth / 1.5;
+            var isAtTheEnd = offset <= scrollLenght
+
+            rightScrollButton.disabled = false
+            targetContainer.scrollBy(-scrollLenght, 0)
+            leftScrollButton.disabled = isAtTheEnd
         }
 
     }

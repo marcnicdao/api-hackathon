@@ -106,7 +106,9 @@ i:hover{
     outline: none;
     font-size: 1rem;
     transition: 0.4s ease-in-out;
+    padding-left: 10px;
 }
+
 .no-trailer-caption{
     color: white;
     height: 40%
@@ -115,10 +117,12 @@ i:hover{
 .cards{
     transition: 0.4s ease-in-out;
 }
+
 .cards:hover{
     transform:scale(1.1);
     cursor: pointer;
 }
+
  .modal{
     height: 100%;
     width: 100%;
@@ -210,13 +214,18 @@ button.scroll{
     border: 0;
     background:linear-gradient( #343a4070, rgba(95, 93, 93, 0.342),#343a4085);
 }
+button.scroll:disabled{
+    color: grey;
+}
 button.scroll:active{
     transform: scale(1.05);
 }
 button.scroll:hover{
     cursor: pointer;
 }
-
+button.scroll:disabled:hover{
+    cursor: default;
+}
 .modal .scroll{
     background:linear-gradient(rgba(0, 0, 0, 0.034), rgba(19, 15, 15, 0.411), rgba(44, 36, 36, 0.747),rgba(19, 15, 15, 0.411), rgba(0, 0, 0, 0.034)
     );
