@@ -136,7 +136,6 @@ class App {
             }
 
         })
-        console.log(container.offsetWidth, container.scrollWidth)
 
         if (this.similarMovieContainer.childElementCount){
             document.querySelector('.modal-similar').classList.remove('no-display')
@@ -153,7 +152,7 @@ class App {
             noResults.classList.remove('no-display')
         }
         setTimeout(()=>{
-            console.log(container.clientWidth, container.scrollWidth)
+
             if (container.clientWidth >= container.scrollWidth) {
                 rightScrollButton.disabled = true
                 leftScrollButton.disabled = true
@@ -251,7 +250,7 @@ class App {
             rightScrollButton.disabled = false
             targetContainer.scrollBy(-scrollLenght, 0)
             leftScrollButton.disabled = isAtTheEnd
-            console.log(offset)
+
         }
 
     }
