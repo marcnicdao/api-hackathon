@@ -53,7 +53,7 @@ class App {
             method: "GET",
             url: `https://api.themoviedb.org/3/movie/popular?api_key=${this.myApikey1}&language=en-US&page=1`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.popularContainer),
-            error: this.getMoviesErrorHandler
+            error: (err)=>{ this.errorHandler(err, this.popularContainer) }
         })
     }
 
@@ -62,8 +62,15 @@ class App {
         this.loadMovies(movies, container)
     }
 
-    errorHandler(err) {
-        console.error(err)
+    errorHandler(err, container) {
+        console.error(err);
+        container.textContent = ''
+        var errorMessageDiv = document.createElement('div')
+        errorMessageDiv.classList.add('flex', 'center', 'error-message')
+        var errorMessage = document.createElement('h3')
+        errorMessage.textContent = 'Network error: please try again later'
+        errorMessageDiv.append(errorMessage)
+        container.append(errorMessageDiv)
     }
 
     getUpcomingMovies() {
@@ -74,7 +81,7 @@ class App {
             method: "GET",
             url: `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.myApikey1}&language=en-US&page=1`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.upcomingContainer),
-            error: this.errorHandler
+            error: (err) => { this.errorHandler(err, this.upcomingContainer) }
         })
     }
 
@@ -90,9 +97,8 @@ class App {
             method: "GET",
             url: `https://api.themoviedb.org/3/search/movie?api_key=${this.myApikey1}&query=${title}`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.searchedContainer),
-            error: () => {
-                this.errorHandler();
-                alert('Could not contact server ')
+            error: (err) => {
+                this.errorHandler(err, this.searchedContainer);
             }
         })
         searchedTitle.textContent = `You searched for: ${title}`
@@ -109,10 +115,7 @@ class App {
             method: 'GET',
             url: `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&sort_by=popularity.desc&vote_count.gte=10&api_key=${this.myApikey1}`,
             success: (movies) => this.loadMovies(movies.results, this.genreContainer),
-            error: ()=> {
-                this.errorHandler();
-                alert('Could not contact server ')
-            }
+            error: (err) => { this.errorHandler(err, this.genreContainer) }
         })
     }
 
@@ -173,7 +176,7 @@ class App {
             success: response => {
                 this.getModalElementsSuccessHandler(response)
             },
-            error: this.getMoviesErrorHandler
+            error: (err) => { this.errorHandler(err, this.similarMovieContainer) }
         })
     }
 
