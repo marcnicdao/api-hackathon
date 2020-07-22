@@ -53,7 +53,7 @@ class App {
             method: "GET",
             url: `https://api.themoviedb.org/3/movie/popular?api_key=${this.myApikey1}&language=en-US&page=1`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.popularContainer),
-            error: (err)=>{ this.errorHandler(err, this.popularContainer) }
+            error: (event, xhr)=>{ this.errorHandler(xhr, this.popularContainer) }
         })
     }
 
@@ -81,7 +81,7 @@ class App {
             method: "GET",
             url: `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.myApikey1}&language=en-US&page=1`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.upcomingContainer),
-            error: (err) => { this.errorHandler(err, this.upcomingContainer) }
+            error: (event, xhr) => { this.errorHandler(xhr, this.upcomingContainer) }
         })
     }
 
@@ -97,8 +97,8 @@ class App {
             method: "GET",
             url: `https://api.themoviedb.org/3/search/movie?api_key=${this.myApikey1}&query=${title}`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.searchedContainer),
-            error: (err) => {
-                this.errorHandler(err, this.searchedContainer);
+            error: (event, xhr) => {
+                this.errorHandler(xhr, this.searchedContainer);
             }
         })
         searchedTitle.textContent = `You searched for: ${title}`
@@ -115,7 +115,7 @@ class App {
             method: 'GET',
             url: `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&sort_by=popularity.desc&vote_count.gte=10&api_key=${this.myApikey1}`,
             success: (movies) => this.loadMovies(movies.results, this.genreContainer),
-            error: (err) => { this.errorHandler(err, this.genreContainer) }
+            error: (event, xhr) => { this.errorHandler(xhr, this.genreContainer) }
         })
     }
 
@@ -176,7 +176,7 @@ class App {
             success: response => {
                 this.getModalElementsSuccessHandler(response)
             },
-            error: (err) => { this.errorHandler(err, this.similarMovieContainer) }
+            error: (event, xhr) => { this.errorHandler(xhr, this.similarMovieContainer) }
         })
     }
 
