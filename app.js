@@ -70,6 +70,7 @@ class App {
         var errorMessage = document.createElement('h3')
         errorMessage.textContent = 'Network error: please try again later'
         errorMessageDiv.append(errorMessage)
+        document.querySelector('.modal-similar').classList.remove('no-display')
         container.append(errorMessageDiv)
     }
 
@@ -176,7 +177,11 @@ class App {
             success: response => {
                 this.getModalElementsSuccessHandler(response)
             },
-            error: (event, xhr) => { this.errorHandler(xhr, this.similarMovieContainer) }
+            error: (event, xhr) => {
+                this.errorHandler(xhr, this.similarMovieContainer)
+                similarMovieCaption.classList.add('no-display')
+                console.log('pls')
+            }
         })
     }
 
