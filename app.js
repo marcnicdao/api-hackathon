@@ -62,16 +62,34 @@ class App {
         this.loadMovies(movies, container)
     }
 
-    errorHandler(err, container) {
+    errorHandler(err, container, refreshParam) {
         console.error(err);
-        container.textContent = ''
+        container.textContent = '';
+        console.log(container);
         var errorMessageDiv = document.createElement('div')
         errorMessageDiv.classList.add('flex', 'center', 'error-message')
+
         var errorMessage = document.createElement('h3')
         errorMessage.textContent = 'Network error: please try again later'
+
+        var refreshButton = document.createElement('i')
+        refreshButton.classList.add('fas', 'fa-redo-alt', 'refresh-button')
+
+        if(container === this.similarMovieContainer){
+            refreshButton.addEventListener('click', () => this.getModalElements(refreshParam))
+        }
+        if(container === this.searchedContainer){
+            refreshButton.addEventListener('click', () => this.getSearchedMovies(refreshParam))
+        }
+        if(container === this.genreContainer){
+            refreshButton.addEventListener('click', () => this.getMovieByGenre(refreshParam))
+        }
+
         errorMessageDiv.append(errorMessage)
-        document.querySelector('.modal-similar').classList.remove('no-display')
+        errorMessageDiv.append(refreshButton)
         container.append(errorMessageDiv)
+
+        document.querySelector('.modal-similar').classList.remove('no-display')
     }
 
     getUpcomingMovies() {
@@ -99,7 +117,7 @@ class App {
             url: `https://api.themoviedb.org/3/search/movie?api_key=${this.myApikey1}&query=${title}`,
             success: (movies) => this.getMoviesSuccessHandler(movies.results, this.searchedContainer),
             error: (event, xhr) => {
-                this.errorHandler(xhr, this.searchedContainer);
+                this.errorHandler(xhr, this.searchedContainer, title);
             }
         })
         searchedTitle.textContent = `You searched for: ${title}`
@@ -116,7 +134,7 @@ class App {
             method: 'GET',
             url: `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&sort_by=popularity.desc&vote_count.gte=10&api_key=${this.myApikey1}`,
             success: (movies) => this.loadMovies(movies.results, this.genreContainer),
-            error: (event, xhr) => { this.errorHandler(xhr, this.genreContainer) }
+            error: (event, xhr) => { this.errorHandler(xhr, this.genreContainer, e) }
         })
     }
 
@@ -178,7 +196,8 @@ class App {
                 this.getModalElementsSuccessHandler(response)
             },
             error: (event, xhr) => {
-                this.errorHandler(xhr, this.similarMovieContainer)
+                console.log(movieId)
+                this.errorHandler(xhr, this.similarMovieContainer, movieId)
                 similarMovieCaption.classList.add('no-display')
             }
         })

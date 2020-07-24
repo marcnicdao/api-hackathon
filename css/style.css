@@ -36,7 +36,18 @@ body{
 }
 .error-message{
     width: 100%;
+    color: white;
 }
+.error-message > *{
+    margin: 0 10px;
+}
+.refresh-button{
+    transition: .3s;
+}
+.refresh-button:hover{
+    color: black
+}
+
 .loading{
     position: absolute;
     width: 100%;
