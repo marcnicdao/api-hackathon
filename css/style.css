@@ -219,6 +219,7 @@ h3{
     background-color: transparent;
     border-radius: 50% ;
     border: none;
+    margin-top: 5px;
 }
 .modal-similar{
     background-color: #030507;
