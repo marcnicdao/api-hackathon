@@ -80,14 +80,21 @@ li:hover{
 .nav-ul{
     position: absolute;
     z-index: 3;
-    top: 1rem;
-    right:25%;
     text-align: center;
     background-color: black;
     flex-direction: column;
     border-radius: 5px;
+    top: .5rem;
+    left: 6.5rem;
 }
-
+.nav{
+    margin-top:20px;
+}
+.genre-header{
+    align-items: center;
+    color: white;
+    position: relative;
+}
 i{
     margin: 10px;
 }

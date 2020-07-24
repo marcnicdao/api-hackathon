@@ -180,7 +180,6 @@ class App {
             error: (event, xhr) => {
                 this.errorHandler(xhr, this.similarMovieContainer)
                 similarMovieCaption.classList.add('no-display')
-                console.log('pls')
             }
         })
     }

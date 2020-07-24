@@ -13,10 +13,6 @@
     <div class="main-container">
         <div class="nav-div flex center">
             <input class="search" id="search" placeholder="Search by title" type="text">
-            <i class="nav fas fa-lg fa-bars"></i>
-            <ul id="nav-ul" class="flex nav-ul no-display">
-            </ul>
-
         </div>
         <h3 class="section-title search-title" id="search-title"></h3>
         <div class="flex center">
@@ -26,10 +22,14 @@
             <button data-target="searched-container" class="left scroll" disabled>&lsaquo;</button>
             <div id="searched-container" class="search-result-container flex view"></div>
             <button data-target="searched-container" class="right scroll" value=">">&rsaquo;</button>
-
         </div>
 
-        <h3 class="section-title" id="genre-title"></h3>
+        <div class="flex genre-header">
+            <h3 class="section-title" id="genre-title"></h3>
+            <i class="nav fas fa-lg fa-bars"></i>
+            <ul id="nav-ul" class="flex nav-ul no-display">
+            </ul>
+        </div>
         <div class="flex view-container">
             <button data-target="genre-container" class="left scroll">&lsaquo;</button>
             <div id="genre-container" class="genre-container flex view"></div>
