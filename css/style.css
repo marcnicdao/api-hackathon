@@ -169,10 +169,8 @@ i:hover{
     background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(24, 20, 20, 0.9), rgba(0, 0, 0, 0.9));
     flex-direction: column;
     border-radius: 10px;
-    overflow-y: auto;
+    overflow-y: scroll;
     padding-top: 3rem;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 .movie-info{
     width: 80%;
