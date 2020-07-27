@@ -18,7 +18,7 @@ body{
     display: flex;
 }
 .view-container{
-    position: relative
+    position: relative;
 }
 .view{
     flex-wrap: nowrap;
@@ -171,6 +171,8 @@ i:hover{
     border-radius: 10px;
     overflow-y: auto;
     padding-top: 3rem;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 .movie-info{
     width: 80%;
