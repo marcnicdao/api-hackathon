@@ -170,7 +170,6 @@ i:hover{
     flex-direction: column;
     border-radius: 10px;
     overflow-y: auto;
-    padding-bottom: 20px;
     padding-top: 3rem;
 }
 .movie-info{
@@ -298,7 +297,9 @@ button:focus{
     .modal-inner{
         width: 100%;
     }
-
+    .modal-similar{
+        padding: 0 1rem;
+    }
 
     .related-container{
         max-height: 25vh;
